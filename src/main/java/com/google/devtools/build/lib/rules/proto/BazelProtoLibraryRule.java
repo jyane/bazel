@@ -17,6 +17,7 @@ package com.google.devtools.build.lib.rules.proto;
 import static com.google.devtools.build.lib.packages.Attribute.attr;
 import static com.google.devtools.build.lib.packages.BuildType.LABEL;
 import static com.google.devtools.build.lib.packages.BuildType.LABEL_LIST;
+import static com.google.devtools.build.lib.syntax.Type.STRING;
 
 import com.google.devtools.build.lib.analysis.BaseRuleClasses;
 import com.google.devtools.build.lib.analysis.RuleDefinition;
@@ -68,6 +69,8 @@ public final class BazelProtoLibraryRule implements RuleDefinition {
         proto_library rule having one or more other proto_library in <code>deps</code>.
         This pattern can be used to e.g. export a public api under a persistent name.
         <!-- #END_BLAZE_RULE.ATTRIBUTE --> */
+        // https://github.com/bazelbuild/bazel/issues/3867
+        .add(attr("import_prefix", STRING))
         .add(
             attr("srcs", LABEL_LIST)
                 .direct_compile_time_input()
